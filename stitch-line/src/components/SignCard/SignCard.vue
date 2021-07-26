@@ -12,9 +12,11 @@ export default {
   props: {
     title: {
       String,
+      default: "Sign up",
     },
     info: {
       String,
+      default: "Sign up as",
     },
   },
   methods: {
