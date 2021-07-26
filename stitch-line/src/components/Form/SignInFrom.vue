@@ -88,6 +88,8 @@
 
 <script>
 import useVuelidate from "@vuelidate/core";
+import { useToast } from "vue-toastification";
+import { apiUrl } from "../../data/data";
 import {
   required,
   email,
@@ -99,7 +101,11 @@ import {
 } from "@vuelidate/validators";
 export default {
   name: "SignInFrom",
-  setup: () => ({ v$: useVuelidate() }),
+
+  setup() {
+    const toast = useToast();
+    return { v$: useVuelidate(), toast };
+  },
 
   data() {
     return {
@@ -121,17 +127,30 @@ export default {
   },
   methods: {
     onClicked: function () {
-      axios
+      this.axios
         .post(`${apiUrl}/find`, {
           username: this.username,
           password: this.password,
         })
         .then((response) => {
-          if (response.data.success == 201) {
-            this.toast.info("Success");
+          if (response.data.code == "400") {
+            this.toast.error(response.data.message);
           }
+          if (response.data.code == "200") {
+            this.toast.success(response.data.message);
+            this.$store.commit("setAuthenticated", true);
+            if (response.data.data.picked == "admin") {
+              this.$router.push(`/profile/admin`);
+            }
+            if (response.data.data.picked == "customer") {
+              this.$router.push(`/profile/customer`);
+            }
+          }
+          console.log(response.data);
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

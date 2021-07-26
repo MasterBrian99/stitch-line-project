@@ -3,13 +3,13 @@ import { createWebHistory, createRouter } from "vue-router";
 import Profile from "../screens/Profile.vue";
 import Signup from "../screens/SignUp.vue";
 import Signin from "../screens/SignIn.vue";
+import Home from "../screens/Home.vue";
 import { store } from "../store/store";
 const routes = [
   {
     path: "/",
-    redirect: {
-      name: "Signin",
-    },
+    name: "Home",
+    component: Home,
   },
   {
     path: "/signup",
@@ -22,7 +22,7 @@ const routes = [
     component: Signin,
   },
   {
-    path: "/profile",
+    path: "/profile/:user",
     name: "Profile",
     component: Profile,
     beforeEnter: (to: any, from: any, next: any) => {

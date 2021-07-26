@@ -3,6 +3,8 @@ import App from "./App.vue";
 import router from "./routes/routes";
 import Toast, { PluginOptions } from "vue-toastification";
 import "vue-toastification/dist/index.css";
+import axios from "axios";
+import VueAxios from "vue-axios";
 import "./index.css";
 
 import { store } from "./store/store";
@@ -13,6 +15,7 @@ const options: PluginOptions = {
 };
 myApp.use(store);
 myApp.use(router);
+myApp.use(VueAxios, axios);
 myApp.use(Toast, options);
 myApp.mount("#app");
 

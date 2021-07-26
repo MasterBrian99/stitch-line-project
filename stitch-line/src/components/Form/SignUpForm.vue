@@ -427,7 +427,7 @@ export default {
 
   methods: {
     onClicked: function () {
-      axios
+      this.axios
         .post(`${apiUrl}/user`, {
           username: this.username,
           fullName: this.fullName,
@@ -440,11 +440,27 @@ export default {
           employeeNumber: this.employeeNumber,
         })
         .then((response) => {
-          if (response.data.success == 201) {
-            this.toast.info("Success");
+          if (response.data.code == "400") {
+            this.toast.error(response.data.message);
           }
+          if (response.data.code == "404") {
+            this.toast.error(response.data.message);
+          }
+          if (response.data.code == "201") {
+            this.toast.success(response.data.message);
+            this.$store.commit("setAuthenticated", true);
+            if (response.data.data.picked == "admin") {
+              this.$router.push(`/profile/admin`);
+            }
+            if (response.data.data.picked == "customer") {
+              this.$router.push(`/profile/customer`);
+            }
+          }
+          console.log(response.data);
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

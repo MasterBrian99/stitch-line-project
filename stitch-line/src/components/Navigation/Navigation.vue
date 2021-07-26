@@ -19,10 +19,8 @@
     <div>
       <ul class="inline-flex">
         <li class="pl-4 text-blue-600">
-          <router-link :to="{ name: 'Signin' }">Home</router-link>
+          <router-link :to="{ name: 'Home' }">Home</router-link>
         </li>
-        <li class="pl-4 text-blue-600">hello</li>
-        <li class="pl-4 text-blue-600">hello</li>
       </ul>
       <router-link
         :to="{ name: `${navLink}` }"
