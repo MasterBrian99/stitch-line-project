@@ -427,40 +427,7 @@ export default {
 
   methods: {
     onClicked: function () {
-      this.axios
-        .post(`${apiUrl}/user`, {
-          username: this.username,
-          fullName: this.fullName,
-          picked: this.picked,
-          email: this.email,
-          mobile: this.mobile,
-          password: this.password,
-          address: this.address,
-          nic: this.nic,
-          employeeNumber: this.employeeNumber,
-        })
-        .then((response) => {
-          if (response.data.code == "400") {
-            this.toast.error(response.data.message);
-          }
-          if (response.data.code == "404") {
-            this.toast.error(response.data.message);
-          }
-          if (response.data.code == "201") {
-            this.toast.success(response.data.message);
-            this.$store.commit("setAuthenticated", true);
-            if (response.data.data.picked == "admin") {
-              this.$router.push(`/profile/admin`);
-            }
-            if (response.data.data.picked == "customer") {
-              this.$router.push(`/profile/customer`);
-            }
-          }
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      this.toast.info("Development Version");
     },
   },
 };
