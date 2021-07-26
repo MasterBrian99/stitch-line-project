@@ -1,4 +1,10 @@
 package com.stitchline.stitchlineApi.util
 
-class StandardResponse {
-}
+import com.stitchline.stitchlineApi.dto.UserDTO
+
+class StandardResponse(
+    var code:String="",
+    var message:String="",
+    var data:UserDTO,
+
+    )

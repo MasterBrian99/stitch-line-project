@@ -1,4 +1,3 @@
 package com.stitchline.stitchlineApi.exception
 
-class NotFoundException {
-}
+class NotFoundException (message: String?) : RuntimeException(message)
