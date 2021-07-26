@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - gh-host
+      - main
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
